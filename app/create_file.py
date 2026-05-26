@@ -25,24 +25,19 @@ if file_name:
     else:
         path = file_name
 
-    count = 1
+    lines = []
     line = input("Enter content line: ")
+    while line != "stop":
+        lines.append(line)
+        line = input("Enter content line: ")
 
     if os.path.exists(path):
-        output_file = open(path, "a")
-        output_file.write("\n")
+        files = open(path, "a")
+        files.write("\n")
     else:
-        output_file = open(path, "w")
-    output_file.write(datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n")
-    output_file.write(f"{count} {line}\n")
-    output_file.close()
+        files = open(path, "w")
 
-    while line != "stop":
-        count += 1
-        line = input("Enter content line: ")
-        if line != "stop":
-            output_file = open(path, "a")
-            output_file.write(f"{count} {line}\n")
-            output_file.close()
-        else:
-            continue
+    files.write(datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "\n")
+    for i, content in enumerate(lines, 1):
+        files.write(f"{i} {content}\n")
+    files.close()
