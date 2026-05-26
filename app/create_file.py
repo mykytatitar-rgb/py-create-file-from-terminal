@@ -12,7 +12,7 @@ if "-d" in args:
             break
         dirs.append(folder)
     if dirs:
-        os.makedirs("/".join(dirs), exist_ok=True)
+        os.makedirs(os.path.join(*dirs), exist_ok=True)
 
 
 file_name = None
@@ -21,7 +21,7 @@ if "-f" in args:
 
 if file_name:
     if dirs:
-        path = "/".join(dirs) + "/" + file_name
+        path = os.path.join(*dirs, file_name)
     else:
         path = file_name
 
